@@ -3853,8 +3853,17 @@ KronolithCore = {
             data.owner_input = null;
         }
         if (data.type == 'holiday') {
-            this.insertCalendarInList('holiday', data.driver, Kronolith.conf.calendars.holiday[data.driver]);
-            this.toggleCalendar('holiday', data.driver);
+			// checking if a holiday is already in the list
+            let check = this.getCalendarList(data.type).textContent.replace(/[^\w\s]/gi, '');
+            if (check === data.driver){
+                // if so: only toggle the calendar
+                this.toggleCalendar('holiday', data.driver);
+            }
+            else {
+                // if not so: add the calendar to the list
+                this.insertCalendarInList('holiday', data.driver, Kronolith.conf.calendars.holiday[data.driver]);
+                this.toggleCalendar('holiday', data.driver);
+            }
             form.down('.kronolithCalendarSave').enable();
             this.closeRedBox();
             this.go(this.lastLocation);
