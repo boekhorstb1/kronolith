@@ -3854,8 +3854,8 @@ KronolithCore = {
         }
         if (data.type == 'holiday') {
 			// checking if a holiday is already in the list
-            let check = this.getCalendarList(data.type).textContent.replace(/[^\w\s]/gi, '');
-            if (check === data.driver){
+            let check = this.getCalendarList(data.type).textContent;
+            if (check.includes(data.driver)){
                 // if so: only toggle the calendar
                 this.toggleCalendar('holiday', data.driver);
             }
