@@ -1,4 +1,4 @@
-# title: What is Kronolith?
+# What is Kronolith?
 
 contact:  <kronolith@lists.horde.org>
 
@@ -59,22 +59,24 @@ New Instructions:
 
 - Adapt the composer.json file of your groupware setup.
 - Additional and Optional plugins and code:
-  + Some are outdated and can only be installed with pear, see Old Instructions
-        + Date_Holidays: This is a pear setup that can currenlty partly be installed with composer. Still, this feature should be adapted to use a more modern librarby. In order to install with composer you have to add the following lines to you groupware setups composer.json:
-        + in the required section:
-        ````
+     + Some are outdated and can only be installed with pear, see Old Instructions
+     + Date_Holidays: This is a pear setup that can currenlty partly be installed with composer. Still, this feature should be adapted to use a more modern librarby. In order to install with composer you have to add the following lines to you groupware setups composer.json:
+     + in the required section:
+
+                   ````
                            \"pear/date_holidays\": \"dev-trunk\",
                             \"pear/date\": \"dev-master\"
-````
-         + in the repository section:
-````
+                   ````
+     + in the repository section:
+
+                    ````
                           \"date\": {
                               \"type\": \"vcs\", \"url\":
                               \"<https://github.com/pear/Date>\" },
                            \"0\": { \"url\":
                               \"<https://horde-satis.maintaina.com>\",
                               \"type\": \"composer\" }
-````
+                    ````
 
 # Assistance
 
