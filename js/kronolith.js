@@ -5096,6 +5096,21 @@ KronolithCore = {
                 } else {
                     // We want to always delete the cache, even if we are not
                     // in a calendar view.
+					
+                    if (type == 'holiday') {
+                        // if it is not toggled: a refresh click should remove the holiday
+                        try{
+                            $checkIfOff = elt.up().select('[class = "horde-resource-off"]');
+                            if (!$checkIfOff.first().empty()){
+                                elt.up().hide();
+                            }
+                        }
+                        catch(error){
+                            // the error is expected to happen
+                            // TODO: find prettier solution
+                        }
+                    }
+
                     this.deleteCache([type, calendar]);
                     this.loadCalendar(type, calendar);
                 }
