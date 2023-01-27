@@ -3854,19 +3854,50 @@ KronolithCore = {
         }
         if (data.type == 'holiday') {
 
+
 			// getting the holidays that are listed but unselected
-            let check = this.getCalendarList(data.type);          
-            let checklist = check.select('span.horde-resource-off').map(
-                item => item = item.textContent
-            );
-            
-            // checking if the new calendar is in the unselected list
-            if (checklist.indexOf(data.driver) > -1){
-                this.toggleCalendar('holiday', data.driver);
-            }else{
+            let check = this.getCalendarList(data.type);
+            let checkOff2 = $('kronolithHolidayCalendars');
+            try {
+                console.log(checkOff2);
+            } catch (error) {
+                //console.log(error);
+
+            }
+
+            // find if its of the off class. Then just toggle it and try to show it
+            let offClassTest = false;
+            try {
+                offClassTest = checkOff2.select('.horde-resource-off');
+            } catch (error) {
+                //console.log(error);
+            }
+
+            if(offClassTest !== false && offClassTest.size() > 0){
+                // check if name matches and should be shown again
+                try {
+                    offClassTest.each(
+                        (item) => {
+                            if(item.outerText === data.driver){
+                                console.log(item.up(1));
+                                if(!item.up(1).visible()){
+                                    this.toggleCalendar('holiday', data.driver);
+                                    item.up(1).show();
+                                }
+                                else {
+                                    this.toggleCalendar('holiday', data.driver);
+                                }
+                            }
+                        }
+                    );
+                } catch (error) {
+                    //console.log(error);
+                }
+            } else {
                 this.insertCalendarInList('holiday', data.driver, Kronolith.conf.calendars.holiday[data.driver]);
                 this.toggleCalendar('holiday', data.driver);
             }
+
 
             form.down('.kronolithCalendarSave').enable();
             this.closeRedBox();
